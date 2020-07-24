@@ -16,7 +16,7 @@ Online retail is a transational data set which contains all the transactions occ
 
 # Diagram
 
-![Screenshot](img/diagram.jpg)
+![Screenshot](img/diagram.png)
 
 
 ## Files
