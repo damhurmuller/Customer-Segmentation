@@ -1,64 +1,43 @@
 import pandas as pd
-from fastapi import FastAPI
-from pydantic import BaseModel
-from typing import List
+from fastapi import FastAPI, Response
+from typing import List, Optional
+from fastapi.params import Query
 
 # dataset path
-dataset = "rfm.csv" 
+dataset_path = "rfm.csv" 
 
 app = FastAPI()
 
-def get_segment(params):
-    """Read the dataset and return the id and segment of the input id
-
-    Parameters:
-    list: ids
-
-    Returns:
-    json: Return the customer id and the segment
-    """
-
-    # read the dataset
-    rfm = pd.read_csv(dataset)
+def load_dataset(path):
+    df = pd.read_csv(path)
     
-    # check if is only one id
-    if len(params) == 1:
-        segment = list(rfm[rfm['customer_id'] == params[0]]["segment"].values)
-        return {'customer_id': params[0], 'segment': segment[0]}
-    # more than one id
-    else:
-        ids = list(rfm[rfm['customer_id'].isin(params)]['customer_id'].values)
-        segment = list(rfm[rfm['customer_id'].isin(params)]["segment"].values)
-        return {'customer_id': ids, 'segment': segment}
+    return df
 
-class Customer(BaseModel):
-    customer_id: List[float]
+# @app.get("/")
+# def read_root():
+#     return {"Hello": "World"}
 
 
-@app.get("/")
-def read_root():
-    """View root.
-
-    Returns:
-    json: {"Hello": "World"}
+@app.get("/customers/")
+def get_users(customer_id: Optional[List[int]] = Query(None)):
     
-    """
-    return {"Hello": "World"}
-
-@app.post("/segments")
-def create_id(customer: Customer):
-    """ Return the customer id and his segment cluster
-
-    Parameters:
-    json: list of one or more ids
+    rfm = load_dataset(dataset_path) 
     
-    Example
-        {"customer_id": [1,2,3]}
+    # ids = list(rfm[rfm['customer_id'].isin(customer_id)]['customer_id'].values)
+    segments = list(rfm[rfm['customer_id'].isin(customer_id)]["segment"].values)
 
-    Returns:
-    json: Return the customer id and the segment
-
-    """
-    response = get_segment(customer.customer_id)
-
+    response = {"customer_id": customer_id, "segment": segments}
+    # response = {"ids": ids}
+    
     return response
+
+@app.get("/customers/{customer_id}")
+def get_user(customer_id : int):
+    rfm = load_dataset(dataset_path)
+
+    if customer_id in rfm['customer_id'].values:
+        segment = rfm[rfm['customer_id'] == customer_id]['segment'].values[0]
+        response = {"customer_id": customer_id, "segment": segment}
+        return response
+    else:
+        return Response('ID Not Avaiable', status_code=200) 
