@@ -14,6 +14,9 @@ Online retail is a transational data set which contains all the transactions occ
  - **CustomerID**: Customer ID.
  - **Country**: Which country happened the transaction.
 
+# Diagram
+
+![Screenshot](img/diagram.jpg)
 
 
 ## Files
