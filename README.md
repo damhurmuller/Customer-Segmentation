@@ -24,18 +24,23 @@ You can test the API with documentation on this link:
 https://retail-rfm-segmentation.herokuapp.com/docs
 
 - For unique ID you can receive the segment on the browser:
+```
 https://retail-rfm-segmentation.herokuapp.com/customers/{id}
+```
 
 **Example**:
+```
 https://retail-rfm-segmentation.herokuapp.com/customers/12347
+```
 
 Return: {'customer_id': 12347, 'segment': 'Master'}
 
 - List of IDs:
+```
 https://retail-rfm-segmentation.herokuapp.com/customers/?customer_id={id}&customer_id={}
+```
 
-The symbol **?** means that parameters are expected.
-The symbol **&** means concatenate.
+The symbol **?** means that parameters are expected. The symbol **&** means concatenate.
 
 **Example**:
 https://retail-rfm-segmentation.herokuapp.com/customers/?customer_id=12347&customer_id=12397
@@ -45,10 +50,14 @@ Return: {'customer_id': [12347, 12397], 'segment': ['Master', 'Business']}
 # Terminal Test
 
 - Unique ID Example:
+```
 curl -X GET "https://retail-rfm-segmentation.herokuapp.com/customers/12347" -H  "accept: application/json"
+```
 
 - List of IDs Example:
+```
 curl -X GET "https://retail-rfm-segmentation.herokuapp.com/customers/?customer_id=12347&customer_id=12397" -H  "accept: application/json"
+```
 
 # Request Python
 
@@ -71,7 +80,7 @@ print('Result: {}'.format(r.json()))
 
 # Telegram Bot
 
-You can use the telegram bot like a usual contact [@customer_segmentation_bot]
+You can use the telegram bot like a usual contact. Copy and paste the contact [@customer_segmentation_bot] in a telegram chat to start a conversation.
 For the Telegram only accept unique id. List od IDs will generate an error.
 
 
