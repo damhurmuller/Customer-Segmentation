@@ -18,6 +18,62 @@ Online retail is a transational data set which contains all the transactions occ
 
 ![Screenshot](img/diagram.png)
 
+# Browser Test
+
+You can test the API with documentation on this link:
+https://retail-rfm-segmentation.herokuapp.com/docs
+
+- For unique ID you can receive the segment on the browser:
+https://retail-rfm-segmentation.herokuapp.com/customers/{id}
+
+**Example**:
+https://retail-rfm-segmentation.herokuapp.com/customers/12347
+
+Return: {'customer_id': 12347, 'segment': 'Master'}
+
+- List of IDs:
+https://retail-rfm-segmentation.herokuapp.com/customers/?customer_id={id}&customer_id={}
+
+The symbol **?** means that parameters are expected.
+The symbol **&** means concatenate.
+
+**Example**:
+https://retail-rfm-segmentation.herokuapp.com/customers/?customer_id=12347&customer_id=12397
+
+Return: {'customer_id': [12347, 12397], 'segment': ['Master', 'Business']}
+
+# Terminal Test
+
+- Unique ID Example:
+curl -X GET "https://retail-rfm-segmentation.herokuapp.com/customers/12347" -H  "accept: application/json"
+
+- List of IDs Example:
+curl -X GET "https://retail-rfm-segmentation.herokuapp.com/customers/?customer_id=12347&customer_id=12397" -H  "accept: application/json"
+
+# Request Python
+
+- Unique ID Example:
+```
+data = 12347
+url = 'https://retail-rfm-segmentation.herokuapp.com/customers/{}'.format(data)
+r = requests.get(url)
+
+print('Result: {}'.format(r.json()))
+```
+- List of IDs Example:
+```
+data = {'customer_id': [12347, 12397]}
+url = 'https://retail-rfm-segmentation.herokuapp.com/customers/'
+r = requests.get(url, params=data)
+
+print('Result: {}'.format(r.json()))
+```
+
+# Telegram Bot
+
+You can use the telegram bot like a usual contact [@customer_segmentation_bot]
+For the Telegram only accept unique id. List od IDs will generate an error.
+
 
 ## Files
 
