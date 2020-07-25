@@ -14,6 +14,8 @@ Online retail is a transational data set which contains all the transactions occ
  - **CustomerID**: Customer ID.
  - **Country**: Which country happened the transaction.
 
+For more informations: https://www.kaggle.com/hellbuoy/online-retail-customer-clustering
+
 # Diagram
 
 ![Screenshot](img/diagram.png)
@@ -84,7 +86,7 @@ For the Telegram only accept unique id. List od IDs will generate an error.
 
 ## Files
 
-- **data**: Folder of the data.
+- **data**: Folder of the data processed.
 - **segments-telegram-bot/**: Folder of the Telegram BOT API.
 - **web_app/**: Folder of the API with Heroku.
 - **Customer_Segmentation.ipynb**: The jupyter notebook with all the analysis process and segmentation.
