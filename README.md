@@ -29,15 +29,13 @@ https://retail-rfm-segmentation.herokuapp.com/customers/{id}
 ```
 
 **Example**:
-```
 https://retail-rfm-segmentation.herokuapp.com/customers/12347
-```
 
 Return: {'customer_id': 12347, 'segment': 'Master'}
 
 - List of IDs:
 ```
-https://retail-rfm-segmentation.herokuapp.com/customers/?customer_id={id}&customer_id={}
+https://retail-rfm-segmentation.herokuapp.com/customers/?customer_id={id}&customer_id={id}
 ```
 
 The symbol **?** means that parameters are expected. The symbol **&** means concatenate.
